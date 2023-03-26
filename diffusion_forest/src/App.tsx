@@ -2,35 +2,26 @@ import React from "react";
 import {
   ChakraProvider,
   theme,
-  Flex,
-  Tooltip,
   Button,
-  useToast,
+  Box,
+  Center,
+  VStack,
+  Heading,
 } from "@chakra-ui/react";
 
 function App() {
-  const toast = useToast();
-
   return (
     <ChakraProvider theme={theme}>
-      <Flex justifyContent="center" alignItems="center" minH="100vh">
-        <Tooltip placement="top" label="ボタンを押すとToastを表示します">
-          <Button
-            colorScheme="green"
-            onClick={() => {
-              toast({
-                title: "Toastです",
-                description: "3秒間表示されます",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-              });
-            }}
-          >
-            hover
+      <VStack>
+        <Center h="520">
+          <Heading fontSize={128}>Diffusion Forest</Heading>
+        </Center>
+        <Center>
+          <Button colorScheme="green" w="full" h="full" fontSize={64}>
+            Start
           </Button>
-        </Tooltip>
-      </Flex>
+        </Center>
+      </VStack>
     </ChakraProvider>
   );
 }
