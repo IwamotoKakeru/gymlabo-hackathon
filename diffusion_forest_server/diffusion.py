@@ -147,22 +147,13 @@ class sdp(StableDiffusionPipeline):
                     image = latents
                     has_nsfw_concept = None
                 elif output_type == "pil":
-                    # 8. Post-processing
                     image = self.decode_latents(latents)
 
-                    # 9. Run safety checker
-                    image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
-
-                    # 10. Convert to PIL
                     image = self.numpy_to_pil(image)
                 else:
-                    # 8. Post-processing
                     image = self.decode_latents(latents)
 
-                    # 9. Run safety checker
-                    image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
-
-                image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=has_nsfw_concept)
+                image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=None)
                 image.images[0].save("step/{}.png".format(i))
 
         if output_type == "latent":
