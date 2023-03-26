@@ -1082,6 +1082,13 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@bradgarropy/use-countdown@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@bradgarropy/use-countdown/-/use-countdown-1.5.2.tgz#a8dcf2928dff009334712056647068d0df9ca977"
+  integrity sha512-Ev7125MW8BJC+r0tRdvuyieCR74zaVyfgRlrOUQKsLDprgB2NAxlLJHHkOvAsYWXA2R+PRXq2ujJ4wf4VdTxvQ==
+  dependencies:
+    date-fns "^2.19.0"
+
 "@chakra-ui/accordion@2.1.10":
   version "2.1.10"
   resolved "https://registry.yarnpkg.com/@chakra-ui/accordion/-/accordion-2.1.10.tgz#3a0ef527e8fd4261747cdac3e6262bb73a41f37a"
@@ -4516,6 +4523,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-fns@^2.19.0:
+  version "2.29.3"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
+  integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
 
 debug@2.6.9, debug@^2.6.0:
   version "2.6.9"
@@ -8729,6 +8741,11 @@ react-style-singleton@^2.2.1:
     get-nonce "^1.0.0"
     invariant "^2.2.4"
     tslib "^2.0.0"
+
+react-timer-hook@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-timer-hook/-/react-timer-hook-3.0.5.tgz#a8d930f99b180cd88da245965a26a17df3e7457b"
+  integrity sha512-n+98SdmYvui2ne3KyWb3Ldu4k0NYQa3g/VzW6VEIfZJ8GAk/jJsIY700M8Nd2vNSTj05c7wKyQfJBqZ0x7zfiA==
 
 react@^18.2.0:
   version "18.2.0"
