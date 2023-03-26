@@ -1,19 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {Button} from '@chakra-ui/react'
+import React from "react";
+import {
+  ChakraProvider,
+  theme,
+  Flex,
+  Tooltip,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 
 function App() {
+  const toast = useToast();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
-      </header>
-      <Button>
-        "Go!!!"
-      </Button>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Flex justifyContent="center" alignItems="center" minH="100vh">
+        <Tooltip placement="top" label="ボタンを押すとToastを表示します">
+          <Button
+            colorScheme="green"
+            onClick={() => {
+              toast({
+                title: "Toastです",
+                description: "3秒間表示されます",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
+            }}
+          >
+            hover
+          </Button>
+        </Tooltip>
+      </Flex>
+    </ChakraProvider>
   );
 }
 
