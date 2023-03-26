@@ -162,8 +162,8 @@ class sdp(StableDiffusionPipeline):
                     # 9. Run safety checker
                     image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
 
-                # image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=has_nsfw_concept)
-                # image[0].save("step/{}.png".format(i))
+                image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=has_nsfw_concept)
+                image.images[0].save("step/{}.png".format(i))
 
         if output_type == "latent":
             image = latents
