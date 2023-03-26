@@ -37,6 +37,9 @@ class sdp(StableDiffusionPipeline):
     ):
         super().__init__(vae, text_encoder, tokenizer, unet, scheduler, safety_checker, feature_extractor, requires_safety_checker)
         self.register_modules(unet=unet, scheduler=scheduler)
+        model_id = "runwayml/stable-diffusion-v1-5"
+        self.pipe = sdp.from_pretrained(model_id, torch_dtype=torch.float16)
+        self.pipe = self.pipe.to("cuda")
 
     @torch.no_grad()
     def __call__(
@@ -184,11 +187,5 @@ class sdp(StableDiffusionPipeline):
 
         return StableDiffusionPipelineOutput(images=image, nsfw_content_detected=has_nsfw_concept)
 
-model_id = "runwayml/stable-diffusion-v1-5"
-pipe = sdp.from_pretrained(model_id, torch_dtype=torch.float16)
-pipe = pipe.to("cuda")
-
-prompt = "a photo of an astronaut riding a horse on mars"
-image = pipe(prompt).images[0]  
-    
-image.save("astronaut_rides_horse.png")
+    def generate_imgs(self, prompt: str = "a photo of an astronaut riding a horse on mars"):
+        self.pipe(prompt)  
