@@ -11,6 +11,6 @@ uvicorn main:app --reload
 
 ## Usage
 ```bash
-curl localhost:8000?prompt=hogehoge fugafuga
+curl localhost:8000?prompt=hogehoge+fugafuga
 ```
 
