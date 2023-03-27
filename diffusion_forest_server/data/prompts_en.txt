@@ -1,0 +1,50 @@
+cloud
+banana
+bicycle
+bookshelf
+sun
+piano
+laptop
+fireworks
+pencil
+soccer ball
+building
+lawn
+mug
+mango
+beach
+spoon
+road
+orange
+lamp
+television
+sunglasses
+festival
+restaurant
+umbrella
+fluorescent lamp
+present
+skateboard
+ice
+shower
+post office
+suitcase
+fork
+cup
+jam
+keychain
+tropical fish
+chocolate
+watch
+cactus
+robot
+ship
+painting
+shrine
+fish
+Christmas tree
+baseball
+sofa
+tablet
+air purifier
+convenience store
