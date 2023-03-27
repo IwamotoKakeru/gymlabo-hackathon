@@ -19,6 +19,10 @@ const GameInput = () => {
     setInputText("");
   };
 
+  const handleChange = (event: any) => {
+    setInputText(event.target.value);
+  };
+
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
       handleSubmit();
@@ -31,8 +35,9 @@ const GameInput = () => {
         <Center>{submitText}</Center>
         <HStack>
           <Input
+            type="text"
             value={inputText}
-            onChange={(event) => setInputText(event.target.value)}
+            onChange={handleChange}
             onKeyPress={handleKeyPress}
           />
           <Button onClick={handleSubmit}>Submit</Button>
