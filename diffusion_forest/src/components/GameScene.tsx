@@ -7,18 +7,18 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-const ImageDisplay = () => {
+const GameScene = () => {
   const navigate = useNavigate();
 
   return (
     <ChakraProvider theme={theme}>
       <VStack>
         <Center h="520">
-          <Heading fontSize={128}>Image Display</Heading>
+          <Heading fontSize={128}>Game</Heading>
         </Center>
       </VStack>
     </ChakraProvider>
   );
 };
 
-export default ImageDisplay;
+export default GameScene;

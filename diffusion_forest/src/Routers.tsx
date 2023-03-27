@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ImageDisplay from "./components/ImageDisplay";
+import GameScene from "./components/GameScene";
 import Title from "./components/Title";
 
 const Routers = () => {
@@ -7,7 +7,7 @@ const Routers = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Title />} />
-        <Route path="/imagedisplay" element={<ImageDisplay />} />
+        <Route path="/GameScene" element={<GameScene />} />
       </Routes>
     </BrowserRouter>
   );

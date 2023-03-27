@@ -19,7 +19,7 @@ const Title = () => {
         </Center>
         <Center>
           <Button
-            onClick={() => navigate("/imagedisplay")}
+            onClick={() => navigate("/GameScene")}
             colorScheme="green"
             w="full"
             h="full"
