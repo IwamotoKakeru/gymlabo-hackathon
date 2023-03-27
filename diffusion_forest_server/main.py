@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-diffusion = init_model()
+#diffusion = init_model()
 
 @app.get('/api/')
 def root():
