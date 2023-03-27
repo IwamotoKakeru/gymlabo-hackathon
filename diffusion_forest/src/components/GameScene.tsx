@@ -1,16 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import {
   ChakraProvider,
   theme,
   Center,
   VStack,
   Heading,
-  Input,
 } from "@chakra-ui/react";
 
-const GameScene = () => {
-  const navigate = useNavigate();
+import GameInput from "./GameInput";
 
+const GameScene = () => {
   return (
     <ChakraProvider theme={theme}>
       <VStack>
@@ -18,7 +16,7 @@ const GameScene = () => {
           <Heading fontSize={128}>Game</Heading>
         </Center>
         <Center h="520">
-          <Input />
+          <GameInput />
         </Center>
       </VStack>
     </ChakraProvider>
