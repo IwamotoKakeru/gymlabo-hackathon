@@ -5,6 +5,7 @@ import {
   Center,
   VStack,
   Heading,
+  Input,
 } from "@chakra-ui/react";
 
 const GameScene = () => {
@@ -15,6 +16,9 @@ const GameScene = () => {
       <VStack>
         <Center h="520">
           <Heading fontSize={128}>Game</Heading>
+        </Center>
+        <Center h="520">
+          <Input />
         </Center>
       </VStack>
     </ChakraProvider>
