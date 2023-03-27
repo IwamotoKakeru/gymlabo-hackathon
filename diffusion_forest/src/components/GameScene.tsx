@@ -6,7 +6,9 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/react";
+
 import { useNavigate } from "react-router-dom";
+import GameImageDisplay from "./GameImageDisplay";
 
 import GameInput from "./GameInput";
 import useCountdown from "@bradgarropy/use-countdown";
@@ -36,6 +38,7 @@ const GameScene = () => {
           <Heading fontSize={128}>Game</Heading>
         </Center>
         <Center h="520">
+          <GameImageDisplay />
           <GameInput />
         </Center>
       </VStack>

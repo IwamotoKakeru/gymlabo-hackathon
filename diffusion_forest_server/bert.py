@@ -20,5 +20,5 @@ def calc_similarity(two_sentences):
     f1, f2 = features[:, 0]
     sim = np.dot(f1, f2) / (np.linalg.norm(f1) * np.linalg.norm(f2))
 
-    return sim
+    return sim.item()
 
