@@ -33,14 +33,9 @@ const GameScene = () => {
           {timeLeft === 0 ? "finished!" : padTime}
         </Heading>
       </Box>
-      <VStack>
-        <Center h="520">
-          <Heading fontSize={128}>Game</Heading>
-        </Center>
-        <Center h="520">
-          <GameImageDisplay />
-          <GameInput />
-        </Center>
+      <VStack h={800} justify='center'>
+        <GameImageDisplay />
+        <GameInput />
       </VStack>
     </ChakraProvider>
   );

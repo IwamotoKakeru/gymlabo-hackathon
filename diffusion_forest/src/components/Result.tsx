@@ -25,15 +25,17 @@ const Result = () => {
         <Center h="520">
           <Heading fontSize={128}>Score: {selectId.score}</Heading>
         </Center>
-        <Button
-          onClick={() => navigate("/")}
-          colorScheme="green"
-          w="full"
-          h="full"
-          fontSize={64}
-        >
-          Start
-        </Button>
+        <Center>
+          <Button
+            onClick={() => navigate("/")}
+            colorScheme="green"
+            w="full"
+            h="full"
+            fontSize={64}
+          >
+            Back to Title
+          </Button>
+        </Center>
       </VStack>
     </ChakraProvider>
   );

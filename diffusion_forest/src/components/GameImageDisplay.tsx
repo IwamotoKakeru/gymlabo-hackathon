@@ -32,7 +32,7 @@ const GameImageDisplay = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Image src={base64Image} alt={"not found"} />
+      <Image src={base64Image} alt={"not found"} justifyContent={'center'}/>
     </ChakraProvider>
   );
 };
