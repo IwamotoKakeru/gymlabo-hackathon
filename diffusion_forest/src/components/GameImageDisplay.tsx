@@ -1,23 +1,36 @@
 import axios from "axios";
 import { forest } from "./sampleImage";
 import { ChakraProvider, theme, Image } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 
-const imageURL: string = "localhost:8000/api/";
+const imageURL: string = "http://localhost:8000/api/";
 
-// const option: any = { responseType: "blob" };
-// axios
-//   .get(imageURL, option)
-//   .then((res: any) => {
-//     // 通信が成功した場合
-//   })
-//   .catch((err: any) => {
-//     // 通信が失敗した場合
-//   });
+axios.defaults.baseURL = "http://localhost:8000/api/";
+// axios.defaults.headers.get["Content-Type"] = "application/json;charset=utf-8";
+axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 
 const GameImageDisplay = () => {
+  const [base64Image, setBase64Image] = useState("");
+  useEffect(() => {
+    axios
+      .get(imageURL, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }) //URL
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        //失敗した時の処理
+        console.log("Error");
+        console.log(typeof error);
+      });
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
-      <Image src={forest} alt={"not found"}/>
+      <Image src={forest} alt={"not found"} />
     </ChakraProvider>
   );
 };
