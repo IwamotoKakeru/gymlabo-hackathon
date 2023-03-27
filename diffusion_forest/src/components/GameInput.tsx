@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import axios from "axios";
 import {
   ChakraProvider,
@@ -9,6 +9,7 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
+import { PromptTextContext } from "../App";
 
 const similaliryURL: string = "/text-similarity?text1=hoge&text2=fuga";
 
@@ -16,17 +17,21 @@ const GameInput = () => {
   const [inputText, setInputText] = useState("");
   const [submitText, setSubmitText] = useState("");
 
-  const [similarity, setSimilarity] = useState();
+  const [similarity, setSimilarity] = useState("");
+  
+  const {promptText,setPromptText} = useContext(PromptTextContext);
 
-  useEffect(() => {
-  }, []);
+  const getSimilarityURL = (text1: string, text2: string) => {
+    // eslint-disable-next-line no-useless-concat
+    return "/text-similarity?text1=" + text1 + "&" + "text2=" + text2;
+  };
 
   const handleSubmit = () => {
     setSubmitText(inputText);
     setInputText("");
     setSimilarity("");
     axios
-      .get(similaliryURL, {
+      .get(getSimilarityURL(promptText,submitText), {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

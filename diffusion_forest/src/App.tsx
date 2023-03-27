@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ChakraProvider,
@@ -10,11 +10,20 @@ import {
 } from "@chakra-ui/react";
 import Routers from "./Routers";
 
+export const PromptTextContext = createContext(
+  {} as {
+    promptText: string;
+    setPromptText: React.Dispatch<React.SetStateAction<string>>;
+  }
+);
 
 function App() {
+  const [promptText, setPromptText] = useState("");
   return (
     <div>
-      <Routers />
+      <PromptTextContext.Provider value={{ promptText, setPromptText }}>
+        <Routers />
+      </PromptTextContext.Provider>
     </div>
   );
 }

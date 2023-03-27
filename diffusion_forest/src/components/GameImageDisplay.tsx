@@ -1,7 +1,8 @@
 import axios from "axios";
 import { forest } from "./sampleImage";
 import { ChakraProvider, theme, Image } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { PromptTextContext } from "../App";
 
 const imageURL: string = "http://localhost:8000/api/";
 
@@ -13,6 +14,7 @@ const imageExtension = "data:image/png;base64,"
 
 const GameImageDisplay = () => {
   const [base64Image, setBase64Image] = useState("");
+  const {promptText,setPromptText} = useContext(PromptTextContext)
 
   useEffect(() => {
     axios
@@ -24,6 +26,7 @@ const GameImageDisplay = () => {
       .then((res) => {
         console.log(res.data);
         setBase64Image(imageExtension+res.data.image);
+        setPromptText(res.data.prompt)
       })
       .catch((error) => {
         console.log("Error");
