@@ -1,13 +1,14 @@
 from PIL import Image
 from fastapi import FastAPI
-from diffusion import *
-import prompt
 
-import utils
 import bert
+import prompt
+import utils
+from diffusion import init_model
 
 
 app = FastAPI()
+
 diffusion = init_model()
 
 @app.get('/api/')
