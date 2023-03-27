@@ -1,10 +1,20 @@
+import utils
+from PIL import Image
 from fastapi import FastAPI
-
 
 app = FastAPI()
 
 
-@app.get('/')
+@app.get('/api/')
 async def root(prompt: str = 'Hello, World!'):
-    return {'prompt': prompt}
+    prompt = 'Hello, World!'
+
+    sample = Image.open('data/forest.png')
+    image = utils.img2base64(sample)
+
+    data = {
+        'prompt': prompt,
+        'image': image,
+    }
+    return data
 
