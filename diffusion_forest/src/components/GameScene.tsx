@@ -7,20 +7,21 @@ import {
   Box,
 } from "@chakra-ui/react";
 import GameTimer from "./Timer";
+import GameImageDisplay from "./GameImageDisplay";
 
 import GameInput from "./GameInput";
 
 const GameScene = () => {
   return (
     <ChakraProvider theme={theme}>
-      <Box pos="absolute" top="0" left="20"><GameTimer /></Box>
-      <VStack>
-        <Center h="520">
-          <Heading fontSize={128}>Game</Heading>
-        </Center>
-        <Center h="520">
+      <Box pos="absolute" top="0" left="20">
+        <GameTimer />
+      </Box>
+      <VStack h="100%" justify="center" bg="gray.100">
+        <Box>
+          <GameImageDisplay />
           <GameInput />
-        </Center>
+        </Box>
       </VStack>
     </ChakraProvider>
   );
