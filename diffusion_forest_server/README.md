@@ -6,7 +6,7 @@ pip install -r requirements.txt
 ```
 
 Save at ./onnx/[bert.onnx](https://o365tsukuba-my.sharepoint.com/:u:/g/personal/s2113534_u_tsukuba_ac_jp/ETk5nAYHfXlFm_jVMb9RNRIBvCL7TfTkI-2GEle1O3WrdQ?e=NmqEn8). 
-Details [here](/onnx/).
+Details [here](/diffusion_forest_server/onnx).
 
 ## Usage
 ```bash
