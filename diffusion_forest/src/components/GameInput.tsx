@@ -38,7 +38,7 @@ const GameInput = () => {
       })
       .then((res) => {
         console.log(res.data.value);
-        setSimilarity(":"+res.data.value+"%!");
+        setSimilarity(res.data.value);
       })
       .catch((error) => {
         console.log("Error");
@@ -58,7 +58,7 @@ const GameInput = () => {
   return (
     <ChakraProvider theme={theme}>
       <VStack>
-        <Center fontSize={64}>{submitText+similarity}</Center>
+        <Center fontSize={64}>{submitText+":"+similarity}</Center>
         <HStack>
           <Input
             type="text"
