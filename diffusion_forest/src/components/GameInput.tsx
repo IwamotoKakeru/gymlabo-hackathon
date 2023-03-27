@@ -32,7 +32,7 @@ const GameInput = () => {
   return (
     <ChakraProvider theme={theme}>
       <VStack>
-        <Center>{submitText}</Center>
+        <Center fontSize={64}>{submitText}</Center>
         <HStack>
           <Input
             type="text"
