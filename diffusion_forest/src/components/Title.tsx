@@ -19,7 +19,7 @@ const Title = () => {
         </Center>
         <Center>
           <Button
-            onClick={() => navigate("/GameScene")}
+            onClick={() => navigate("/StartCountdown")}
             colorScheme="green"
             w="full"
             h="full"
