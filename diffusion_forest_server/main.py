@@ -2,8 +2,10 @@ from PIL import Image
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-import utils
 import bert
+import prompt
+import utils
+from diffusion import init_model
 
 
 app = FastAPI()
@@ -15,6 +17,7 @@ app.add_middleware(
     allow_headers=['*']
 )
 
+diffusion = init_model()
 
 @app.get('/api/')
 def root():
@@ -36,3 +39,17 @@ def calc_similarity(text1: str, text2: str):
     }
     return response
 
+@app.get('/api/generate')
+def generate():
+    pmt = prompt.get()
+    img_list = diffusion.generate_imgs(pmt)
+    imgs = []
+    for i in range(1,7):
+        img = img_list[i*10-1]
+        imgs.append(utils.img2base64(img))
+
+    response = {
+        'prompt': pmt,
+        'image': imgs,
+    }
+    return response
