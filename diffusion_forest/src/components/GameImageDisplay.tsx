@@ -9,28 +9,30 @@ axios.defaults.baseURL = "http://localhost:8000/api/";
 // axios.defaults.headers.get["Content-Type"] = "application/json;charset=utf-8";
 axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
 
+const imageExtension = "data:image/png;base64,"
+
 const GameImageDisplay = () => {
   const [base64Image, setBase64Image] = useState("");
+
   useEffect(() => {
     axios
       .get(imageURL, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
-      }) //URL
+      })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setBase64Image(imageExtension+res.data.image);
       })
       .catch((error) => {
-        //失敗した時の処理
         console.log("Error");
-        console.log(typeof error);
       });
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
-      <Image src={forest} alt={"not found"} />
+      <Image src={base64Image} alt={"not found"} />
     </ChakraProvider>
   );
 };
