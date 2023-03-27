@@ -37,9 +37,6 @@ class sdp(StableDiffusionPipeline):
     ):
         super().__init__(vae, text_encoder, tokenizer, unet, scheduler, safety_checker, feature_extractor, requires_safety_checker)
         self.register_modules(unet=unet, scheduler=scheduler)
-        model_id = "runwayml/stable-diffusion-v1-5"
-        self.pipe = sdp.from_pretrained(model_id, torch_dtype=torch.float16)
-        self.pipe = self.pipe.to("cuda")
 
     @torch.no_grad()
     def __call__(
@@ -118,6 +115,7 @@ class sdp(StableDiffusionPipeline):
 
         # 7. Denoising loop
         num_warmup_steps = len(timesteps) - num_inference_steps * self.scheduler.order
+        imgs = []
         with self.progress_bar(total=num_inference_steps) as progress_bar:
             for i, t in enumerate(timesteps):
                 # expand the latents if we are doing classifier free guidance
@@ -157,35 +155,16 @@ class sdp(StableDiffusionPipeline):
                     image = self.decode_latents(latents)
 
                 image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=None)
-                image.images[0].save("step/{}.png".format(i))
-
-        if output_type == "latent":
-            image = latents
-            has_nsfw_concept = None
-        elif output_type == "pil":
-            # 8. Post-processing
-            image = self.decode_latents(latents)
-
-            # 9. Run safety checker
-            image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
-
-            # 10. Convert to PIL
-            image = self.numpy_to_pil(image)
-        else:
-            # 8. Post-processing
-            image = self.decode_latents(latents)
-
-            # 9. Run safety checker
-            image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
-
-        # Offload last model to CPU
-        if hasattr(self, "final_offload_hook") and self.final_offload_hook is not None:
-            self.final_offload_hook.offload()
-
-        if not return_dict:
-            return (image, has_nsfw_concept)
-
-        return StableDiffusionPipelineOutput(images=image, nsfw_content_detected=has_nsfw_concept)
+                imgs.append(image.images[0])
+        image.images[0].save("dbg_genereated.png")
+        return imgs
 
     def generate_imgs(self, prompt: str = "a photo of an astronaut riding a horse on mars"):
-        self.pipe(prompt)  
+        imgs = self.__call__(prompt=prompt, output_type="pil", num_inference_steps=60, callback_steps=1)
+        return imgs
+
+def init_model():
+    model_id = "runwayml/stable-diffusion-v1-5"
+    pipe = sdp.from_pretrained(model_id, torch_dtype=torch.float16)
+    pipe = pipe.to("cuda")
+    return pipe    
