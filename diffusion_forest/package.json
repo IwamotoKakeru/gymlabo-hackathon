@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bradgarropy/use-countdown": "^1.5.2",
     "@chakra-ui/react": "^2.5.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
