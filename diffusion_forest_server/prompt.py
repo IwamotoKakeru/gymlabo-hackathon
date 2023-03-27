@@ -7,8 +7,6 @@ def get(idx=None, lang='en'):
     with open(file) as f:
         prompts = f.read().split('\n')
 
-    n = len(prompts)
-
     if idx is None:
         idx = random.randint(0, len(prompts)-1)
 
