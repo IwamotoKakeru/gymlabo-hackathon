@@ -39,8 +39,8 @@ const GameScene = () => {
       <VStack h={800} justify='center'>
         <GameImageDisplay />
         <GameInput
-          setBestSimState={(val:any)=>setBestSim(val)}
-          setBestAnsState={(val:any)=>setBsetAns(val)}
+          setBestSimState={setBestSim}
+          setBestAnsState={setBsetAns}
         />
       </VStack>
     </ChakraProvider>

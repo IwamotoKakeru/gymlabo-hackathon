@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {
   ChakraProvider,
@@ -13,26 +13,20 @@ import { PromptTextContext } from "../App";
 
 const similaliryURL: string = "/text-similarity?text1=hoge&text2=fuga";
 
-interface GameProps{
-  setBestSimState: any,
-  setBestAnsState: any,
-}
+type Props = {
+  setBestSimState: Function;
+  setBestAnsState: Function;
+};
 
-const GameInput: React.FC<GameProps> = props => {
+const GameInput = (props: Props) => {
   const [inputText, setInputText] = useState("");
   const [submitText, setSubmitText] = useState("");
 
   const [similarity, setSimilarity] = useState(-1.0);
 
-  const [bestText, setBestText] = useState("");
-  const [bestSim, setBestSim] = useState(-1.0);
-  
-  const {promptText,setPromptText} = useContext(PromptTextContext);
-
-  useEffect(()=>{
-    props.setBestSimState(bestSim);
-    props.setBestAnsState(bestText);
-  },[props])
+  const { promptText, setPromptText } = useContext(PromptTextContext);
+  const { bestText, setBestText } = useContext(PromptTextContext);
+  const { bestSim, setBestSim } = useContext(PromptTextContext);
 
   const getSimilarityURL = (text1: string, text2: string) => {
     // eslint-disable-next-line no-useless-concat
@@ -43,13 +37,9 @@ const GameInput: React.FC<GameProps> = props => {
     setSubmitText(inputText);
     const sim = inputText.length;
     setSimilarity(sim);
-    if(sim > bestSim){
-      setBestText(inputText);
-      setBestSim(sim);
-    }
-    /*
+    
     axios
-      .get(getSimilarityURL(promptText,inputText), {
+      .get(getSimilarityURL(promptText, inputText), {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -65,7 +55,6 @@ const GameInput: React.FC<GameProps> = props => {
       .catch((error) => {
         console.log("Error");
       });
-      */
     setInputText("");
   };
 
@@ -82,7 +71,7 @@ const GameInput: React.FC<GameProps> = props => {
   return (
     <ChakraProvider theme={theme}>
       <VStack>
-        <Center fontSize={64}>{submitText+":"+similarity}</Center>
+        <Center fontSize={64}>{submitText}:{similarity*100}%</Center>
         <HStack>
           <Input
             type="text"
