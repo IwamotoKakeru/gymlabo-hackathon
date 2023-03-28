@@ -7,29 +7,32 @@ import {
   Center,
   VStack,
   Heading,
+  Box,
 } from "@chakra-ui/react";
 
 const Title = () => {
   const navigate = useNavigate();
   return (
-    <ChakraProvider theme={theme}>
-      <VStack>
-        <Center h="520">
-          <Heading fontSize={128}>Diffusion Forest</Heading>
-        </Center>
-        <Center>
-          <Button
-            onClick={() => navigate("/StartCountdown")}
-            colorScheme="green"
-            w="full"
-            h="full"
-            fontSize={64}
-          >
-            Start
-          </Button>
-        </Center>
-      </VStack>
-    </ChakraProvider>
+    <VStack>
+      <Center h="520">
+        <Heading fontSize={128} color="white">
+          Diffusion Forest
+        </Heading>
+      </Center>
+      <Center>
+        <Button
+          onClick={() => navigate("/StartCountdown")}
+          w="full"
+          h="full"
+          color="white"
+          variant="outline"
+          fontSize={64}
+          size="lg"
+        >
+          Start
+        </Button>
+      </Center>
+    </VStack>
   );
 };
 

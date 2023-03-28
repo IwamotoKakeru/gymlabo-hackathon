@@ -20,10 +20,9 @@ const Result = () => {
   const navigate = useNavigate();
 
   return (
-    <ChakraProvider theme={theme}>
       <VStack>
         <Center h="520">
-          <Heading fontSize={128}>Score: {selectId.score}</Heading>
+          <Heading fontSize={128} color='white'>Score: {selectId.score}</Heading>
         </Center>
         <Center>
           <Button
@@ -37,7 +36,6 @@ const Result = () => {
           </Button>
         </Center>
       </VStack>
-    </ChakraProvider>
   );
 };
 

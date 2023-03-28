@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {
   ChakraProvider,
@@ -18,8 +18,8 @@ const GameInput = () => {
   const [submitText, setSubmitText] = useState("");
 
   const [similarity, setSimilarity] = useState("");
-  
-  const {promptText,setPromptText} = useContext(PromptTextContext);
+
+  const { promptText, setPromptText } = useContext(PromptTextContext);
 
   const getSimilarityURL = (text1: string, text2: string) => {
     // eslint-disable-next-line no-useless-concat
@@ -31,7 +31,7 @@ const GameInput = () => {
     setInputText("");
     setSimilarity("");
     axios
-      .get(getSimilarityURL(promptText,submitText), {
+      .get(getSimilarityURL(promptText, submitText), {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -56,20 +56,33 @@ const GameInput = () => {
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <VStack>
-        <Center fontSize={64}>{submitText+":"+similarity}</Center>
-        <HStack>
-          <Input
-            type="text"
-            value={inputText}
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-          />
-          <Button onClick={handleSubmit}>Submit</Button>
-        </HStack>
-      </VStack>
-    </ChakraProvider>
+    <VStack>
+      <Center fontSize={64} color="white">
+        {submitText + ":" + similarity}
+      </Center>
+      <HStack>
+        <Input
+          type="text"
+          value={inputText}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+          color="white"
+          fontSize={32}
+          h="full"
+          placeholder="Input Text"
+        />
+        <Button
+          onClick={handleSubmit}
+          h='full'
+          color="white"
+          variant="outline"
+          fontSize={32}
+          size='sm'
+        >
+          Submit
+        </Button>
+      </HStack>
+    </VStack>
   );
 };
 
