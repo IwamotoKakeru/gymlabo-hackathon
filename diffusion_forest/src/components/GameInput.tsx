@@ -13,13 +13,26 @@ import { PromptTextContext } from "../App";
 
 const similaliryURL: string = "/text-similarity?text1=hoge&text2=fuga";
 
-const GameInput = () => {
+interface GameProps{
+  setBestSimState: any,
+  setBestAnsState: any,
+}
+
+const GameInput: React.FC<GameProps> = props => {
   const [inputText, setInputText] = useState("");
   const [submitText, setSubmitText] = useState("");
 
-  const [similarity, setSimilarity] = useState("");
+  const [similarity, setSimilarity] = useState(-1.0);
+
+  const [bestText, setBestText] = useState("");
+  const [bestSim, setBestSim] = useState(-1.0);
   
   const {promptText,setPromptText} = useContext(PromptTextContext);
+
+  useEffect(()=>{
+    props.setBestSimState(bestSim);
+    props.setBestAnsState(bestText);
+  },[props])
 
   const getSimilarityURL = (text1: string, text2: string) => {
     // eslint-disable-next-line no-useless-concat
@@ -28,10 +41,15 @@ const GameInput = () => {
 
   const handleSubmit = () => {
     setSubmitText(inputText);
-    setInputText("");
-    setSimilarity("");
+    const sim = inputText.length;
+    setSimilarity(sim);
+    if(sim > bestSim){
+      setBestText(inputText);
+      setBestSim(sim);
+    }
+    /*
     axios
-      .get(getSimilarityURL(promptText,submitText), {
+      .get(getSimilarityURL(promptText,inputText), {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -39,10 +57,16 @@ const GameInput = () => {
       .then((res) => {
         console.log(res.data.value);
         setSimilarity(res.data.value);
+        if (res.data.value > bestSim) {
+          setBestSim(res.data.value);
+          setBestText(inputText);
+        }
       })
       .catch((error) => {
         console.log("Error");
       });
+      */
+    setInputText("");
   };
 
   const handleChange = (event: any) => {

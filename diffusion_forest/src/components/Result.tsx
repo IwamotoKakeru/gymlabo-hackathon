@@ -9,12 +9,13 @@ import {
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import GameImageDisplay from "./GameImageDisplay";
 
 const Result = () => {
   const location = useLocation();
 
-  const [selectId, setSelectId] = useState<{ score: number }>(
-    location.state as { score: number }
+  const [selectId, setSelectId] = useState<{ score: number, submitText: string }>(
+    location.state as { score: number, submitText: string }
   );
 
   const navigate = useNavigate();
@@ -22,8 +23,14 @@ const Result = () => {
   return (
     <ChakraProvider theme={theme}>
       <VStack>
-        <Center h="520">
-          <Heading fontSize={128}>Score: {selectId.score}</Heading>
+        <Center>
+          <GameImageDisplay />
+        </Center>
+        <Center>
+          <Heading fontSize={96}>Your answer: {selectId.submitText}</Heading>
+        </Center>
+        <Center>
+          <Heading fontSize={96}>Score: {selectId.score}</Heading>
         </Center>
         <Center>
           <Button

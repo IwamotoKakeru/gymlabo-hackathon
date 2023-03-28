@@ -7,6 +7,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import GameImageDisplay from "./GameImageDisplay";
 
@@ -14,13 +15,15 @@ import GameInput from "./GameInput";
 import useCountdown from "@bradgarropy/use-countdown";
 
 const GameScene = () => {
+  const [bestSim, setBestSim] = useState(-1);
+  const [bestAns, setBsetAns] = useState("");
   const navigate = useNavigate();
   const countdown = useCountdown({
-    minutes: 1,
-    seconds: 0,
+    minutes: 0,
+    seconds: 15,
     onCompleted: () =>
       setTimeout(() => {
-        navigate("/Result", { state: { score: 100 } });
+        navigate("/Result", { state: { score: bestSim * 100, submitText: bestAns } });
       }, 3000),
   });
   const timeLeft = countdown.minutes * 60 + countdown.seconds;
@@ -35,7 +38,10 @@ const GameScene = () => {
       </Box>
       <VStack h={800} justify='center'>
         <GameImageDisplay />
-        <GameInput />
+        <GameInput
+          setBestSimState={(val:any)=>setBestSim(val)}
+          setBestAnsState={(val:any)=>setBsetAns(val)}
+        />
       </VStack>
     </ChakraProvider>
   );
