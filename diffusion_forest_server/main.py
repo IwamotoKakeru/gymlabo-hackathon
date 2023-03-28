@@ -49,23 +49,15 @@ async def generate(img_num: int = 6):
     }
     return response
 
-@app.get('/api/get-image-step')
-def get_image(id: int):
-    with Image.open(f'step/{id}.png') as img:
-        try:
-            response = {
-                'image': utils.img2base64(img)
-            }
-        except:
-            response = {
-                'image': None
-            }
-    return response
-
 @app.get('/api/get-image')
-def get_image():
+def get_image(id: int = None):
+    if id is None:
+        path = 'generated.png'
+    else:
+        path = f'step/{id}.png'
+
     try:
-        with open('genereated.png', 'rb') as f:
+        with open(path, 'rb') as f:
             img = Image.open(f)
             response = {
                 'image': utils.img2base64(img)
