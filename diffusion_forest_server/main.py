@@ -35,7 +35,7 @@ def root():
 @app.get('/api/text-similarity')
 def calc_similarity(text1: str, text2: str):
     response = {
-        'value': bert.calc_similarity(('The picture of ' + text1, text2))
+        'value': bert.calc_similarity(('The picture of ' + text1, 'The picture of ' + text2))
     }
     return response
 
