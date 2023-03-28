@@ -155,8 +155,10 @@ class sdp(StableDiffusionPipeline):
                     image = self.decode_latents(latents)
 
                 image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=None)
-                imgs.append(image.images[0])
-        self.save_img(imgs)
+
+                if i % (num_inference_steps // self.img_num) == 0:
+                    image.images[0].save('step/{}.png'.format(i // (num_inference_steps // self.img_num)))
+        
         image.images[0].save("genereated.png")
 
     def save_img(self, imgs):
@@ -167,7 +169,7 @@ class sdp(StableDiffusionPipeline):
     def generate_imgs(self, prompt: str = "a photo of an astronaut riding a horse on mars", steps=60, img_num=6):
         self.steps=steps
         self.img_num=img_num
-        self.__call__(prompt=prompt, output_type="pil", num_inference_steps=60, callback_steps=1)
+        self.__call__(prompt=prompt, output_type="pil", num_inference_steps=self.steps, callback_steps=1)
 
 def init_model():
     model_id = "runwayml/stable-diffusion-v1-5"
