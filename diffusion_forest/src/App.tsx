@@ -7,6 +7,7 @@ import {
   Center,
   VStack,
   Heading,
+  Box,
 } from "@chakra-ui/react";
 import Routers from "./Routers";
 
@@ -20,11 +21,13 @@ export const PromptTextContext = createContext(
 function App() {
   const [promptText, setPromptText] = useState("");
   return (
-    <div>
-      <PromptTextContext.Provider value={{ promptText, setPromptText }}>
-        <Routers />
-      </PromptTextContext.Provider>
-    </div>
+    <ChakraProvider>
+      <Box h="1080" backgroundColor="green.400">
+        <PromptTextContext.Provider value={{ promptText, setPromptText }}>
+          <Routers />
+        </PromptTextContext.Provider>
+      </Box>
+    </ChakraProvider>
   );
 }
 
