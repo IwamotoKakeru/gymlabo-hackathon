@@ -69,20 +69,22 @@ const GameInput = (props: Props) => {
   };
 
   return (
-    <ChakraProvider theme={theme}>
       <VStack>
         <Center fontSize={64}>{submitText}:{similarity*100}%</Center>
         <HStack>
           <Input
-            type="text"
-            value={inputText}
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-          />
+          type="text"
+          value={inputText}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+          color="white"
+          fontSize={32}
+          h="full"
+          placeholder="Input Text"
+        />
           <Button onClick={handleSubmit}>Submit</Button>
         </HStack>
       </VStack>
-    </ChakraProvider>
   );
 };
 

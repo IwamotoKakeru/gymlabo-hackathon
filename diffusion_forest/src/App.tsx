@@ -7,6 +7,7 @@ import {
   Center,
   VStack,
   Heading,
+  Box,
 } from "@chakra-ui/react";
 import Routers from "./Routers";
 
@@ -35,20 +36,22 @@ function App() {
   const [bestText, setBestText] = useState("");
   const [bestSim, setBestSim] = useState(-1.0);
   return (
-    <div>
-      <PromptTextContext.Provider
-        value={{
-          promptText,
-          setPromptText,
-          bestText,
-          setBestText,
-          bestSim,
-          setBestSim,
-        }}
-      >
-        <Routers />
-      </PromptTextContext.Provider>
-    </div>
+    <ChakraProvider>
+      <Box h="1080" backgroundColor="green.400">
+        <PromptTextContext.Provider
+          value={{
+            promptText,
+            setPromptText,
+            bestText,
+            setBestText,
+            bestSim,
+            setBestSim,
+          }}
+        >
+          <Routers />
+        </PromptTextContext.Provider>
+      </Box>
+    </ChakraProvider>
   );
 }
 

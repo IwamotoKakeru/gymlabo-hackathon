@@ -33,7 +33,6 @@ const Result = () => {
   };
 
   return (
-    <ChakraProvider theme={theme}>
       <VStack>
         <Center>
           <GameImageDisplay />
@@ -41,8 +40,8 @@ const Result = () => {
         <Center>
           <Heading fontSize={96}>Your answer: {bestText}</Heading>
         </Center>
-        <Center>
-          <Heading fontSize={96}>Score: {bestSim * 100}%</Heading>
+        <Center h="520">
+          <Heading fontSize={128} color='white'>Score: {bestSim * 100}%</Heading>
         </Center>
         <Center>
           <Button
@@ -56,7 +55,6 @@ const Result = () => {
           </Button>
         </Center>
       </VStack>
-    </ChakraProvider>
   );
 };
 
