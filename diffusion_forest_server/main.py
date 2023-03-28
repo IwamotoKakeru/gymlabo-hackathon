@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-#diffusion = init_model()
+diffusion = init_model()
 
 @app.get('/api/')
 def root():
@@ -35,21 +35,36 @@ def root():
 @app.get('/api/text-similarity')
 def calc_similarity(text1: str, text2: str):
     response = {
-        'value': bert.calc_similarity((text1, text2))
+        'value': bert.calc_similarity(('The picture of ' + text1, 'The picture of ' + text2))
     }
     return response
 
 @app.get('/api/generate')
-def generate():
-    pmt = prompt.get()
-    img_list = diffusion.generate_imgs(pmt)
-    imgs = []
-    for i in range(1,7):
-        img = img_list[i*10-1]
-        imgs.append(utils.img2base64(img))
-
+async def generate(img_num: int = 6):
+    pmt = 'The picture of ' + prompt.get()
+    diffusion.generate_imgs(pmt, img_num=img_num)
     response = {
         'prompt': pmt,
-        'image': imgs,
+        'img_num': img_num
     }
+    return response
+
+@app.get('/api/get-image')
+def get_image(id: int = None):
+    if id is None:
+        path = 'generated.png'
+    else:
+        path = f'step/{id}.png'
+
+    try:
+        with open(path, 'rb') as f:
+            img = Image.open(f)
+            response = {
+                'image': utils.img2base64(img)
+            }
+    except:
+        response = {
+            'image': None
+        }
+    
     return response
