@@ -156,15 +156,21 @@ class sdp(StableDiffusionPipeline):
 
                 image = StableDiffusionPipelineOutput(images=image, nsfw_content_detected=None)
                 imgs.append(image.images[0])
-        image.images[0].save("dbg_genereated.png")
-        return imgs
+        self.save_img(imgs)
+        image.images[0].save("genereated.png")
 
-    def generate_imgs(self, prompt: str = "a photo of an astronaut riding a horse on mars"):
-        imgs = self.__call__(prompt=prompt, output_type="pil", num_inference_steps=60, callback_steps=1)
-        return imgs
+    def save_img(self, imgs):
+        for i in range(1, self.img_num+1):
+            idx = i * self.steps // self.img_num - 1
+            imgs[idx].save("step/{}.png".format(i))
+
+    def generate_imgs(self, prompt: str = "a photo of an astronaut riding a horse on mars", steps=60, img_num=6):
+        self.steps=steps
+        self.img_num=img_num
+        self.__call__(prompt=prompt, output_type="pil", num_inference_steps=60, callback_steps=1)
 
 def init_model():
     model_id = "runwayml/stable-diffusion-v1-5"
     pipe = sdp.from_pretrained(model_id, torch_dtype=torch.float16)
     pipe = pipe.to("cuda")
-    return pipe    
+    return pipe
