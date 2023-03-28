@@ -13,13 +13,20 @@ import { PromptTextContext } from "../App";
 
 const similaliryURL: string = "/text-similarity?text1=hoge&text2=fuga";
 
-const GameInput = () => {
+type Props = {
+  setBestSimState: Function;
+  setBestAnsState: Function;
+};
+
+const GameInput = (props: Props) => {
   const [inputText, setInputText] = useState("");
   const [submitText, setSubmitText] = useState("");
 
-  const [similarity, setSimilarity] = useState("");
+  const [similarity, setSimilarity] = useState(-1.0);
 
   const { promptText, setPromptText } = useContext(PromptTextContext);
+  const { bestText, setBestText } = useContext(PromptTextContext);
+  const { bestSim, setBestSim } = useContext(PromptTextContext);
 
   const getSimilarityURL = (text1: string, text2: string) => {
     // eslint-disable-next-line no-useless-concat
@@ -28,10 +35,11 @@ const GameInput = () => {
 
   const handleSubmit = () => {
     setSubmitText(inputText);
-    setInputText("");
-    setSimilarity("");
+    const sim = inputText.length;
+    setSimilarity(sim);
+    
     axios
-      .get(getSimilarityURL(promptText, submitText), {
+      .get(getSimilarityURL(promptText, inputText), {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -39,10 +47,15 @@ const GameInput = () => {
       .then((res) => {
         console.log(res.data.value);
         setSimilarity(res.data.value);
+        if (res.data.value > bestSim) {
+          setBestSim(res.data.value);
+          setBestText(inputText);
+        }
       })
       .catch((error) => {
         console.log("Error");
       });
+    setInputText("");
   };
 
   const handleChange = (event: any) => {
@@ -56,12 +69,10 @@ const GameInput = () => {
   };
 
   return (
-    <VStack>
-      <Center fontSize={64} color="white">
-        {submitText + ":" + similarity}
-      </Center>
-      <HStack>
-        <Input
+      <VStack>
+        <Center fontSize={64}>{submitText}:{similarity*100}%</Center>
+        <HStack>
+          <Input
           type="text"
           value={inputText}
           onChange={handleChange}
@@ -71,18 +82,9 @@ const GameInput = () => {
           h="full"
           placeholder="Input Text"
         />
-        <Button
-          onClick={handleSubmit}
-          h='full'
-          color="white"
-          variant="outline"
-          fontSize={32}
-          size='sm'
-        >
-          Submit
-        </Button>
-      </HStack>
-    </VStack>
+          <Button onClick={handleSubmit}>Submit</Button>
+        </HStack>
+      </VStack>
   );
 };
 
